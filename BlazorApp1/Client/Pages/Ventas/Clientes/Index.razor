@@ -1,0 +1,102 @@
+﻿@page "/clientes"
+<h1>Clientes</h1>
+<br />
+<p>Descripción clientes (*)</p>
+<hr />
+
+<button class="btn btn-outline-success" @onclick="()=>add(0)"><FeatherPlus Color="Green"></FeatherPlus></button>
+<br />
+<br />
+
+
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5"
+                AllowPaging="true" ShowPagingSummary="true"
+                Data="@oRespuesta.List" TItem="Cliente" ColumnWidth="50px" LogicalFilterOperator="LogicalFilterOperator.Or">
+    <Columns>
+        <RadzenDataGridColumn TItem="Cliente" Property="Id" Filterable="false" Title="ID" Width="40px"  />
+        <RadzenDataGridColumn TItem="Cliente" Property="NombreEmpresa" Title="Nombre" Frozen="true" Width="100px" />
+        <RadzenDataGridColumn TItem="Cliente" Property="Cuit" Filterable="false" Title="Cuit" Width="100px" />
+        <RadzenDataGridColumn TItem="Cliente" Property="Calle" Title="Calle" Filterable="false" Width="80px" />
+        <RadzenDataGridColumn TItem="Cliente" Property="Mail" Title="Mail" Filterable="false" Width="80px" />
+        <RadzenDataGridColumn TItem="Cliente" Property="Telefono" Title="Telefono" Filterable="false" Width="80px" />
+        <RadzenDataGridColumn TItem="Cliente" Property="Cp" Title="Codigo postal" Filterable="false" Width="60px" />
+        <RadzenDataGridColumn TItem="Cliente" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="50px" >
+            <Template Context="data">
+                <RadzenButton ButtonStyle="ButtonStyle.Info" Icon="refresh" Class="m-1" Click=@(() => add(data.Id)) Text="" />
+            </Template>
+
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Cliente" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="50px" >
+            <Template Context="data">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="report" Class="m-1" Click=@(() => Deletear(data.Id)) Text="" TextAlign="TextAlign.Left"/>
+            </Template>
+        </RadzenDataGridColumn>
+        
+    </Columns>
+</RadzenDataGrid>
+
+
+
+
+
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+    Respuesta<List<Cliente>> oRespuesta = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Get();
+    }
+
+    async Task Get()
+    {
+        var respuesta = await http.GetFromJsonAsync<Respuesta<List<Cliente>>>("/api/Cliente");
+        oRespuesta = respuesta;
+        StateHasChanged();
+    }
+
+    async void Deletear(int id)
+    {
+        await http.DeleteAsync($"/api/Cliente/{id}");
+        await Get();
+    }
+
+    async Task add(int id)
+    {
+        if(id!=0){
+            var parameters = new ModalParameters();
+        parameters.Add(nameof(AddCliente.id), id);
+            var formModal = Modal.Show<AddCliente>("Editar Cliente", parameters);
+        var result = await formModal.Result;
+if (result.Cancelled)
+        {
+            Console.WriteLine("Modal was cancelled");
+        }
+        else
+        {
+            await Get();
+        }        
+        if (result.Cancelled)
+        {
+            Console.WriteLine("Modal was cancelled");
+        }
+        else
+        {
+            await Get();
+        }
+        }else{
+             
+        var formModal = Modal.Show<AddCliente>("Agregar Cliente");
+        var result = await formModal.Result;
+        
+        
+        if (result.Cancelled)
+        {
+            Console.WriteLine("Modal was cancelled");
+        }
+        else
+        {
+            await Get();
+        }
+    }}
+}

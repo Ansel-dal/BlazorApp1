@@ -1,0 +1,98 @@
+﻿<div class="card">
+    <div class="card-body">
+
+        <EditForm Model="@oPersonal" OnValidSubmit="Guardar">
+            <DataAnnotationsValidator />
+
+            <div class="row" style="width=100%;">
+                <div class="col-sm-6">
+                    <label>Nombre</label>
+                    <InputText class="form-control" @bind-Value="@oPersonal.Nombres" placeholder="Nombre"></InputText>
+                    <ValidationMessage For="(()=> oPersonal.Nombres)" style="color:red;" />
+
+                </div>
+            </div>
+            <br>
+            <div class="row" style="width=100%;">
+                <div class="col-sm-6">
+                    <label>Apellido</label>
+                    <InputText class="form-control" @bind-Value="@oPersonal.Apellido" placeholder="Apellido"></InputText>
+                    <ValidationMessage For="(()=> oPersonal.Apellido)" style="color:red;" />
+
+                </div>
+            </div>
+            <br>
+           
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="col-sm">DNI</label>
+                    <InputNumber @bind-Value="@oPersonal.Dni" class="form-control" placeholder="DNI"></InputNumber>
+                    <ValidationMessage For="(()=> oPersonal.Dni)" style="color:red;" />
+
+                </div>
+            </div>
+            <br>
+            <div class="row" style="width=100%;">
+
+                <div class="col-sm-6">
+                    <label class="col-sm">Mail</label>
+                    <InputText @bind-Value="@oPersonal.Mail" class="form-control" placeholder="Mail"></InputText>
+                    <ValidationMessage For="(()=> oPersonal.Mail)" style="color:red;" />
+
+
+                </div>
+
+            </div>
+            <div class="row" style="width=100%;">
+                <div class="col-sm-6">
+                    <label>Telefono</label>
+                    <InputText class="form-control" @bind-Value="@oPersonal.Telefono" placeholder="Telefono"></InputText>
+                    <ValidationMessage For="(()=> oPersonal.Telefono)" style="color:red;" />
+
+                </div>
+            </div>
+            <br>
+            <br />
+            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            <button @onclick="cancel" class="btn btn-light">Cancel</button>
+        </EditForm>
+    </div>
+</div>
+
+
+
+
+@code {
+    Personal oPersonal = new();
+    Respuesta<Personal> oRta = new();
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+    [Parameter] public int id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (id != 0)
+        {
+            oRta = await http.GetFromJsonAsync<Respuesta<Personal>>($"/api/Personal/{id}");
+            oPersonal = oRta.List;
+        }
+    }
+
+    async Task Guardar()
+    {
+        if (id == 0)
+        {
+            await http.PostAsJsonAsync<Personal>("/api/Personal", oPersonal);
+            await ModalInstance.CloseAsync(ModalResult.Ok($"Form was submitted successfully."));
+        }
+        else
+        {
+            await http.PutAsJsonAsync<Personal>("/api/Personal", oPersonal);
+            await ModalInstance.CloseAsync(ModalResult.Ok($"Form was submitted successfully."));
+        }
+    }
+    async Task cancel()
+    {
+        await ModalInstance.CloseAsync(ModalResult.Ok($"Form was cancelled"));
+
+    }
+}

@@ -1,0 +1,106 @@
+﻿@page "/proveedores"
+<h1>Proveedores</h1>
+<br />
+<p>Descripción proveedores (*)</p>
+<hr />
+
+<button class="btn btn-outline-success" @onclick="()=>add(0)"><FeatherPlus Color="Green"></FeatherPlus></button>
+<br />
+<br />
+
+
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5"
+                AllowPaging="true" ShowPagingSummary="true"
+                Data="@oRespuesta.List" TItem="Proveedore" ColumnWidth="50px" LogicalFilterOperator="LogicalFilterOperator.Or">
+    <Columns>
+        <RadzenDataGridColumn TItem="Proveedore" Property="Id" Title="ID" Width="40px" />
+        <RadzenDataGridColumn TItem="Proveedore" Property="NombreEmpresa" Title="Nombre" Frozen="true" Width="100px" />
+        <RadzenDataGridColumn TItem="Proveedore" Property="Cuit" Title="Cuit" Width="100px" />
+        <RadzenDataGridColumn TItem="Proveedore" Property="Calle" Title="Calle" Width="80px" />
+        <RadzenDataGridColumn TItem="Proveedore" Property="Mail" Title="Mail" Width="80px" />
+        <RadzenDataGridColumn TItem="Proveedore" Property="Telefono" Title="Telefono" Width="80px" />
+        <RadzenDataGridColumn TItem="Proveedore" Property="Cp" Title="Codigo postal" Width="60px" />
+        <RadzenDataGridColumn TItem="Proveedore" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="50px">
+            <Template Context="data">
+                <RadzenButton ButtonStyle="ButtonStyle.Info" Icon="refresh" Class="m-1" Click=@(() => add(data.Id)) Text="" />
+            </Template>
+
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Proveedore" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="50px">
+            <Template Context="data">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="report" Class="m-1" Click=@(() => Deletear(data.Id)) Text="" TextAlign="TextAlign.Left" />
+            </Template>
+        </RadzenDataGridColumn>
+
+    </Columns>
+</RadzenDataGrid>
+
+
+
+
+
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+    Respuesta<List<Proveedore>> oRespuesta = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Get();
+    }
+
+    async Task Get()
+    {
+        var respuesta = await http.GetFromJsonAsync<Respuesta<List<Proveedore>>>("/api/Proveedore");
+        oRespuesta = respuesta;
+        StateHasChanged();
+    }
+
+    async void Deletear(int id)
+    {
+        await http.DeleteAsync($"/api/Proveedore/{id}");
+        await Get();
+    }
+
+    async Task add(int id)
+    {
+        if (id != 0)
+        {
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(AddProveedor.id), id);
+            var formModal = Modal.Show<AddProveedor>("Editar proveedor", parameters);
+            var result = await formModal.Result;
+            if (result.Cancelled)
+            {
+                Console.WriteLine("Modal was cancelled");
+            }
+            else
+            {
+                await Get();
+            }
+            if (result.Cancelled)
+            {
+                Console.WriteLine("Modal was cancelled");
+            }
+            else
+            {
+                await Get();
+            }
+        }
+        else
+        {
+
+            var formModal = Modal.Show<AddProveedor>("Agregar proveedor");
+            var result = await formModal.Result;
+
+
+            if (result.Cancelled)
+            {
+                Console.WriteLine("Modal was cancelled");
+            }
+            else
+            {
+                await Get();
+            }
+        }
+    }
+}

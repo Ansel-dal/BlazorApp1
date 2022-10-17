@@ -1,0 +1,75 @@
+﻿@page "/activos"
+<h1>Activos</h1>
+<br />
+<p>Descripción activos (*)</p>
+<hr />
+
+<button class="btn btn-outline-success" @onclick="()=>add(0)"><FeatherPlus Color="Green"></FeatherPlus></button>
+<br />
+<br />
+
+
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10"
+                AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@oRespuesta.List" TItem="Activo" ColumnWidth="250px" LogicalFilterOperator="LogicalFilterOperator.Or">
+    <Columns>
+        <RadzenDataGridColumn TItem="Activo" Property="Id" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="Activo" Property="Nombre" Title="Nombre" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn TItem="Activo" Property="Marca" Title="Marca" Width="120px" />
+        <RadzenDataGridColumn TItem="Activo" Property="Cantidad" Title="Cantidad" Width="120px" />
+        <RadzenDataGridColumn TItem="Activo" Property="FechaIngreso" Title="Fecha de ingreso" Width="120px" />
+        <RadzenDataGridColumn TItem="Activo" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="80px">
+            <Template Context="data">
+                <RadzenButton ButtonStyle="ButtonStyle.Info" Icon="refresh" Class="m-1" Click=@(() => add(data.Id)) Text="" />
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Activo" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="80px">
+            <Template Context="data">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="report" Class="m-1" Click=@(() => Deletear(data.Id)) Text="" />
+            </Template>
+        </RadzenDataGridColumn>
+    </Columns>
+</RadzenDataGrid>
+
+
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+    Respuesta<List<Activo>> oRespuesta = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Get();
+    }
+
+    async Task Get()
+    {
+        var respuesta = await http.GetFromJsonAsync<Respuesta<List<Activo>>>("/api/Activo");
+        oRespuesta = respuesta;
+        StateHasChanged();
+    }
+
+    async void Deletear(int id)
+    {
+        await http.DeleteAsync($"/api/Activo/{id}");
+        await Get();
+    }
+
+    async Task add(int id)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(AddActivo.id), id);
+
+
+
+        var formModal = Modal.Show<AddActivo>("Agregar activo", parameters);
+        var result = await formModal.Result;
+        if (result.Cancelled)
+        {
+            Console.WriteLine("Modal was cancelled");
+        }
+        else
+        {
+            await Get();
+        }
+    }
+}
