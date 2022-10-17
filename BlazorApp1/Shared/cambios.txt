@@ -1,0 +1,9 @@
+﻿
+
+En depósito solo visualización, y crud en bienes e insumos (compras).
+
+
+
+
+
+
