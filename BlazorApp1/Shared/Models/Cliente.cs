@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlazorApp1.Shared.Models
 {
     public partial class Cliente
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Ingrese un nombre válido.")]
+        [MaxLength(20, ErrorMessage = "Ha superado los carácteres máximos (20).")]
         public string? NombreEmpresa { get; set; }
         public string? Cuit { get; set; }
         public string? Calle { get; set; }
