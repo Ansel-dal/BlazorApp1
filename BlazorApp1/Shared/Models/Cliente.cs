@@ -11,6 +11,7 @@ namespace BlazorApp1.Shared.Models
         [MaxLength(20, ErrorMessage = "Ha superado los carácteres máximos (20).")]
         public string? NombreEmpresa { get; set; }
         //pedrito capo
+        //anselcapo
         public string? Cuit { get; set; }
         public string? Calle { get; set; }
         public string? Mail { get; set; }
