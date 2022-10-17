@@ -10,6 +10,7 @@ namespace BlazorApp1.Shared.Models
         [Required(ErrorMessage = "Ingrese un nombre válido.")]
         [MaxLength(20, ErrorMessage = "Ha superado los carácteres máximos (20).")]
         public string? NombreEmpresa { get; set; }
+        //pedrito capo
         public string? Cuit { get; set; }
         public string? Calle { get; set; }
         public string? Mail { get; set; }
