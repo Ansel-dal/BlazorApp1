@@ -9,18 +9,18 @@ namespace BlazorApp1.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ActivoController : ControllerBase
+    public class MaquinasController : ControllerBase
     {
         [HttpGet("{id:int}")]
         public IActionResult Get(int id)
         {
-            Respuesta<Activo> oRespuesta = new();
+            Respuesta<MaquinasHerramienta> oRespuesta = new();
 
             try
             {
                 using DiMetalloContext db = new();
 
-                var lst = db.Activos
+                var lst = db.MaquinasHerramientas
                     .Where(x => x.Id == id)
                     .First();
                 oRespuesta.Exito = 1;
@@ -36,13 +36,13 @@ namespace BlazorApp1.Server.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            Respuesta<List<Activo>> oRespuesta = new();
+            Respuesta<List<MaquinasHerramienta>> oRespuesta = new();
 
             try
             {
                 using DiMetalloContext db = new();
 
-                var lst = db.Activos.ToList(); 
+                var lst = db.MaquinasHerramientas.ToList(); 
                 oRespuesta.Exito = 1;
                 oRespuesta.List = lst;
             }
@@ -54,23 +54,15 @@ namespace BlazorApp1.Server.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Activo model)
+        public IActionResult Add(MaquinasHerramienta model)
         {
-            Respuesta<Activo> oRespuesta = new();
+            Respuesta<MaquinasHerramienta> oRespuesta = new();
 
             try
             {
-                using DiMetalloContext db = new();
+                using DiMetalloContext db = new();                
 
-                Activo oActivo = new();
-
-                oActivo.Marca = model.Marca;
-                oActivo.Nombre = model.Nombre;
-                oActivo.FechaIngreso = model.FechaIngreso;
-                oActivo.Cantidad = model.Cantidad;
-                
-
-                db.Activos.Add(oActivo);
+                db.MaquinasHerramientas.Add(model);
                 db.SaveChanges();
                 oRespuesta.Exito = 1;
             }
@@ -83,23 +75,19 @@ namespace BlazorApp1.Server.Controllers
         }
 
         [HttpPut]
-        public IActionResult Edit(Activo model)
+        public IActionResult Edit(MaquinasHerramienta model)
         {
-            Respuesta<Activo> oRespuesta = new();
+            Respuesta<MaquinasHerramienta> oRespuesta = new();
 
             try
             {
                 using DiMetalloContext db = new();
 
-                Activo oActivo = db.Activos.Find(model.Id);
+                MaquinasHerramienta oMaquinasHerramienta = db.MaquinasHerramientas.Find(model.Id);
 
-                oActivo.Marca = model.Marca;
-                oActivo.Nombre = model.Nombre;
-                oActivo.FechaIngreso = model.FechaIngreso;
-                oActivo.Cantidad = model.Cantidad;
-                
+                oMaquinasHerramienta = model;                
 
-                db.Entry(oActivo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                db.Entry(oMaquinasHerramienta).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 db.SaveChanges();
                 oRespuesta.Exito = 1;
             }
@@ -114,13 +102,13 @@ namespace BlazorApp1.Server.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int Id)
         {
-            Respuesta<Activo> oRespuesta = new();
+            Respuesta<MaquinasHerramienta> oRespuesta = new();
             try
             {
                 using DiMetalloContext db = new();
 
-                Activo oActivo = db.Activos.Find(Id);
-                db.Remove(oActivo);
+                MaquinasHerramienta oMaquinasHerramienta = db.MaquinasHerramientas.Find(Id);
+                db.Remove(oMaquinasHerramienta);
                 db.SaveChanges();
                 oRespuesta.Exito = 1;
             }

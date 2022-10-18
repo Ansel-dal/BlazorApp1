@@ -7,8 +7,8 @@
             <div class="row" style="width=100%;">
                 <div class="col-sm-6">
                     <label>Razon social</label>
-                    <InputText class="form-control" @bind-Value="@oProveedor.NombreEmpresa" placeholder="Razon social"></InputText>
-                    <ValidationMessage For="(()=> oProveedor.NombreEmpresa)" style="color:red;" />
+                    <InputText class="form-control" @bind-Value="@oProveedor.RazonSocial" placeholder="Razon social"></InputText>
+                    <ValidationMessage For="(()=> oProveedor.RazonSocial)" style="color:red;" />
 
 
                 </div>
@@ -21,12 +21,7 @@
             </div>
             <br />
             <div class="row">
-                <div class="col-sm-6">
-                    <label class="col-sm">Dirección</label>
-                    <InputText @bind-Value="@oProveedor.Calle" class="form-control" placeholder="Dirección"></InputText>
-                    <ValidationMessage For="(()=> oProveedor.Calle)" style="color:red;" />
-
-                </div>
+                
                 <div class="col-sm-6">
                     <label class="col-sm">Mail</label>
                     <InputText @bind-Value="@oProveedor.Mail" class="form-control" placeholder="Mail"></InputText>
@@ -55,13 +50,6 @@
             </div>
             <br />
             <div class="row">
-
-                <div class="col-sm-6">
-                    <label class="col-sm">Consumidor final</label>
-                    <InputText @bind-Value="@oProveedor.Cf" class="form-control" placeholder="Consumidor final"></InputText>
-                    <ValidationMessage For="(()=> oProveedor.Cf)" style="color:red;" />
-
-                </div>
 
                 <div class="col-sm-6">
                     <label class="col-sm">Nombre del contacto</label>
