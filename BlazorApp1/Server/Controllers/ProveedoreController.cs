@@ -64,8 +64,6 @@ namespace BlazorApp1.Server.Controllers
 
                 Proveedore oProveedore = new();
 
-                oProveedore.Calle = model.Calle;
-                oProveedore.Cf = model.Cf;
                 oProveedore.Cp = model.Cp;
                 oProveedore.Mail = model.Mail;
                 oProveedore.NombreContacto = model.NombreContacto;
@@ -73,6 +71,9 @@ namespace BlazorApp1.Server.Controllers
                 oProveedore.Cuit = model.Cuit;
                 oProveedore.Telefono = model.Telefono;
                 oProveedore.Observaciones = model.Observaciones;
+                oProveedore.Direccion = model.Direccion;
+                oProveedore.RazonSocial = model.RazonSocial;
+
 
                 db.Proveedores.Add(oProveedore);
                 db.SaveChanges();
@@ -97,8 +98,6 @@ namespace BlazorApp1.Server.Controllers
 
                 Proveedore oProveedore = db.Proveedores.Find(model.Id);
 
-                oProveedore.Calle = model.Calle;
-                oProveedore.Cf = model.Cf;
                 oProveedore.Cp = model.Cp;
                 oProveedore.Mail = model.Mail;
                 oProveedore.NombreContacto = model.NombreContacto;
@@ -106,6 +105,9 @@ namespace BlazorApp1.Server.Controllers
                 oProveedore.Cuit = model.Cuit;
                 oProveedore.Telefono = model.Telefono;
                 oProveedore.Observaciones = model.Observaciones;
+                oProveedore.Direccion = model.Direccion;
+                oProveedore.RazonSocial = model.RazonSocial;
+
 
                 db.Entry(oProveedore).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 db.SaveChanges();

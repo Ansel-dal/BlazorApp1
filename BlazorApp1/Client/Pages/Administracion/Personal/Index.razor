@@ -13,24 +13,29 @@
                 AllowPaging="true" ShowPagingSummary="true"
                 Data="@oRespuesta.List" TItem="Personal" ColumnWidth="50px" LogicalFilterOperator="LogicalFilterOperator.Or">
     <Columns>
-        <RadzenDataGridColumn TItem="Personal" Property="Id" Title="ID" Width="40px"  />
+        <RadzenDataGridColumn TItem="Personal" Property="Legajo" Title="Legajo" Width="40px" />
         <RadzenDataGridColumn TItem="Personal" Property="Nombres" Title="Nombres" Frozen="true" Width="100px" />
         <RadzenDataGridColumn TItem="Personal" Property="Apellido" Title="Apellido" Width="100px" />
         <RadzenDataGridColumn TItem="Personal" Property="Dni" Title="DNI" Width="80px" />
         <RadzenDataGridColumn TItem="Personal" Property="Mail" Title="Mail" Width="80px" />
         <RadzenDataGridColumn TItem="Personal" Property="Telefono" Title="Telefono" Width="80px" />
-        <RadzenDataGridColumn TItem="Personal" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="50px" >
+        <RadzenDataGridColumn TItem="Personal" Property="Direccion" Title="Direccion" Width="80px" />
+        <RadzenDataGridColumn TItem="Personal" Property="CondicionContractual" Title="Condicion contractual" Width="80px" />
+        <RadzenDataGridColumn TItem="Personal" Property="Puesto" Title="Puesto" Width="80px" />
+        <RadzenDataGridColumn TItem="Personal" Property="Categoria" Title="Categoria" Width="80px" />
+        <RadzenDataGridColumn TItem="Personal" Property="PremioEstablecido" Title="Premio establecido" Width="80px" />
+        <RadzenDataGridColumn TItem="Personal" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="50px">
             <Template Context="data">
                 <RadzenButton ButtonStyle="ButtonStyle.Info" Icon="refresh" Class="m-1" Click=@(() => add(data.Id)) Text="" />
             </Template>
 
         </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="Personal" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="50px" >
+        <RadzenDataGridColumn TItem="Personal" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="50px">
             <Template Context="data">
-                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="report" Class="m-1" Click=@(() => Deletear(data.Id)) Text="" TextAlign="TextAlign.Left"/>
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="report" Class="m-1" Click=@(() => Deletear(data.Id)) Text="" TextAlign="TextAlign.Left" />
             </Template>
         </RadzenDataGridColumn>
-        
+
     </Columns>
 </RadzenDataGrid>
 
@@ -62,40 +67,37 @@
 
     async Task add(int id)
     {
-        if(id!=0){
+        if (id != 0)
+        {
             var parameters = new ModalParameters();
-        parameters.Add(nameof(AddPersonal.id), id);
+            parameters.Add(nameof(AddPersonal.id), id);
             var formModal = Modal.Show<AddPersonal>("Editar Personal", parameters);
-        var result = await formModal.Result;
-if (result.Cancelled)
-        {
-            Console.WriteLine("Modal was cancelled");
+            var result = await formModal.Result;
+            if (result.Cancelled)
+            {
+                Console.WriteLine("Modal was cancelled");
+            }
+            else
+            {
+                await Get();
+            }
+            
         }
         else
         {
-            await Get();
-        }        
-        if (result.Cancelled)
-        {
-            Console.WriteLine("Modal was cancelled");
+
+            var formModal = Modal.Show<AddPersonal>("Agregar Personal");
+            var result = await formModal.Result;
+
+
+            if (result.Cancelled)
+            {
+                Console.WriteLine("Modal was cancelled");
+            }
+            else
+            {
+                await Get();
+            }
         }
-        else
-        {
-            await Get();
-        }
-        }else{
-             
-        var formModal = Modal.Show<AddPersonal>("Agregar Personal");
-        var result = await formModal.Result;
-        
-        
-        if (result.Cancelled)
-        {
-            Console.WriteLine("Modal was cancelled");
-        }
-        else
-        {
-            await Get();
-        }
-    }}
+    }
 }

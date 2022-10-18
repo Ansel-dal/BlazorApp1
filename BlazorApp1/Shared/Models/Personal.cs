@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace BlazorApp1.Shared.Models
 {
@@ -11,5 +13,11 @@ namespace BlazorApp1.Shared.Models
         public int? Dni { get; set; }
         public string? Mail { get; set; }
         public string? Telefono { get; set; }
+        public string? Direccion { get; set; }
+        public string? CondicionContractual { get; set; }
+        public int? Legajo { get; set; }
+        public string? Puesto { get; set; }
+        public string? Categoria { get; set; }
+        public string? PremioEstablecido { get; set; }
     }
 }

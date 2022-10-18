@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations;
 namespace BlazorApp1.Shared.Models
 {
     public partial class Repuesto

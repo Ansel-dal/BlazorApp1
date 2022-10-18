@@ -4,7 +4,7 @@
         <EditForm Model="@oPersonal" OnValidSubmit="Guardar">
             <DataAnnotationsValidator />
 
-            <div class="row" style="width=100%;">
+            <div class="row" style="width:100%;">
                 <div class="col-sm-6">
                     <label>Nombre</label>
                     <InputText class="form-control" @bind-Value="@oPersonal.Nombres" placeholder="Nombre"></InputText>
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <br>
-            <div class="row" style="width=100%;">
+            <div class="row" style="width:100%;">
                 <div class="col-sm-6">
                     <label>Apellido</label>
                     <InputText class="form-control" @bind-Value="@oPersonal.Apellido" placeholder="Apellido"></InputText>
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <br>
-            <div class="row" style="width=100%;">
+            <div class="row" style="width:100%;">
 
                 <div class="col-sm-6">
                     <label class="col-sm">Mail</label>
@@ -43,7 +43,7 @@
                 </div>
 
             </div>
-            <div class="row" style="width=100%;">
+            <div class="row" style="width:100%;">
                 <div class="col-sm-6">
                     <label>Telefono</label>
                     <InputText class="form-control" @bind-Value="@oPersonal.Telefono" placeholder="Telefono"></InputText>
@@ -52,9 +52,61 @@
                 </div>
             </div>
             <br>
+            <div class="row" style="width:100%;">
+                <div class="col-sm-6">
+                    <label>Direccion</label>
+                    <InputText class="form-control" @bind-Value="@oPersonal.Direccion" placeholder="Direccion"></InputText>
+                    <ValidationMessage For="(()=> oPersonal.Direccion)" style="color:red;" />
+
+                </div>
+            </div>
+            <br>
+            <div class="row" style="width:100%;">
+                <div class="col-sm-6">
+                    <label>Condicion contractual</label>
+                    <InputText class="form-control" @bind-Value="@oPersonal.CondicionContractual" placeholder="Condicion contractual"></InputText>
+                    <ValidationMessage For="(()=> oPersonal.CondicionContractual)" style="color:red;" />
+
+                </div>
+            </div>
+            <br>
+            <div class="row" style="width:100%;">
+                <div class="col-sm-6">
+                    <label>Legajo</label>
+                    <InputNumber class="form-control" @bind-Value="@oPersonal.Legajo" placeholder="Legajo"></InputNumber>
+                    <ValidationMessage For="(()=> oPersonal.Legajo)" style="color:red;" />
+
+                </div>
+            </div>
+            <br>
+            <div class="row" style="width:100%;">
+                <div class="col-sm-6">
+                    <label>Puesto</label>
+                    <InputText class="form-control" @bind-Value="@oPersonal.Puesto" placeholder="Puesto"></InputText>
+                    <ValidationMessage For="(()=> oPersonal.Puesto)" style="color:red;" />
+
+                </div>
+            </div>
+            <br>
+            <div class="row" style="width:100%;">
+                <div class="col-sm-6">
+                    <label>Categoria</label>
+                    <InputText class="form-control" @bind-Value="@oPersonal.Categoria" placeholder="Categoria"></InputText>
+                    <ValidationMessage For="(()=> oPersonal.Categoria)" style="color:red;" />
+
+                </div>
+            </div>
+            <br>
+            <div class="row" style="width:100%;">
+                <div class="col-sm-6">
+                    <label>Premio establecido</label>
+                    <InputText class="form-control" @bind-Value="@oPersonal.PremioEstablecido" placeholder="Premio establecido"></InputText>
+                    <ValidationMessage For="(()=> oPersonal.PremioEstablecido)" style="color:red;" />
+                </div>
+            </div>
             <br />
-            <button type="submit" class="btn btn-primary mr-2">Submit</button>
-            <button @onclick="cancel" class="btn btn-light">Cancel</button>
+            <button type="submit" class="btn btn-primary mr-2">Aceptar</button>
+            <button @onclick="cancel" class="btn btn-light">Cancelar</button>
         </EditForm>
     </div>
 </div>

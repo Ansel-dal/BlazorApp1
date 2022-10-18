@@ -64,8 +64,7 @@ namespace BlazorApp1.Server.Controllers
 
                 Cliente oCliente = new();
                 
-                oCliente.Calle = model.Calle;
-                oCliente.Cf = model.Cf;
+                oCliente.Direccion = model.Direccion;
                 oCliente.Cp = model.Cp;
                 oCliente.Mail = model.Mail;
                 oCliente.NombreContacto = model.NombreContacto;
@@ -73,6 +72,8 @@ namespace BlazorApp1.Server.Controllers
                 oCliente.Cuit = model.Cuit;
                 oCliente.Telefono = model.Telefono;
                 oCliente.Observaciones = model.Observaciones;
+                oCliente.RazonSocial = model.RazonSocial;
+                oCliente.Corredor = model.Corredor;
 
                 db.Clientes.Add(oCliente);
                 db.SaveChanges();
@@ -98,8 +99,7 @@ namespace BlazorApp1.Server.Controllers
 
                 Cliente oCliente = db.Clientes.Find(model.Id);
 
-                oCliente.Calle = model.Calle;
-                oCliente.Cf = model.Cf;
+                oCliente.Direccion = model.Direccion;
                 oCliente.Cp = model.Cp;
                 oCliente.Mail = model.Mail;
                 oCliente.NombreContacto = model.NombreContacto;
@@ -107,6 +107,8 @@ namespace BlazorApp1.Server.Controllers
                 oCliente.Cuit = model.Cuit;
                 oCliente.Telefono = model.Telefono;
                 oCliente.Observaciones = model.Observaciones;
+                oCliente.RazonSocial = model.RazonSocial;
+                oCliente.Corredor = model.Corredor;
 
                 db.Entry(oCliente).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 db.SaveChanges();

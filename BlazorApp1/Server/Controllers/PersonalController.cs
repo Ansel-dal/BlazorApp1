@@ -69,6 +69,12 @@ namespace BlazorApp1.Server.Controllers
                 oPersonal.Dni = model.Dni;
                 oPersonal.Mail = model.Mail;
                 oPersonal.Telefono = model.Telefono;
+                oPersonal.Direccion = model.Direccion;
+                oPersonal.CondicionContractual = model.CondicionContractual;
+                oPersonal.Legajo = model.Legajo;
+                oPersonal.Puesto = model.Puesto;
+                oPersonal.Categoria = model.Categoria;
+                oPersonal.PremioEstablecido = model.PremioEstablecido;
 
                 db.Personals.Add(oPersonal);
                 db.SaveChanges();
@@ -98,6 +104,12 @@ namespace BlazorApp1.Server.Controllers
                 oPersonal.Dni = model.Dni;
                 oPersonal.Mail = model.Mail;
                 oPersonal.Telefono = model.Telefono;
+                oPersonal.Direccion = model.Direccion;
+                oPersonal.CondicionContractual = model.CondicionContractual;
+                oPersonal.Legajo = model.Legajo;
+                oPersonal.Puesto = model.Puesto;
+                oPersonal.Categoria = model.Categoria;
+                oPersonal.PremioEstablecido = model.PremioEstablecido;
 
                 db.Entry(oPersonal).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 db.SaveChanges();
