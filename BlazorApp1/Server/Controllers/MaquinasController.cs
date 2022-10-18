@@ -83,11 +83,7 @@ namespace BlazorApp1.Server.Controllers
             {
                 using DiMetalloContext db = new();
 
-                MaquinasHerramienta oMaquinasHerramienta = db.MaquinasHerramientas.Find(model.Id);
-
-                oMaquinasHerramienta = model;                
-
-                db.Entry(oMaquinasHerramienta).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                db.Entry(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 db.SaveChanges();
                 oRespuesta.Exito = 1;
             }

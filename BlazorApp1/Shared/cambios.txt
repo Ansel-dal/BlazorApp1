@@ -16,3 +16,31 @@ Cambiar Campo Nombre por Descripción.
 Eliminar Campo Cantidad
 
 creamos nueva ordencompra
+
+--------------------------------------------------------------------
+
+que es disposicion??? para personal sector donde labura.
+			   para máquinas es sector donde está
+--------------------------------------------------------------------
+personal tiene estado: baja, alta
+maquinas tiene estado: operativa, en reparación, baja
+--------------------------------------------------------------------
+agregar campo????
+se genera una solicitud desde el pañol (pido tornillos), pasa a 
+compras, se genera orden de compra. se aprueba la orden (se gasta 
+la plata). pasa a pañol, espera a hacerse la recepción. cuando 
+se hace la recepción, hay un campo que es "control" que es 
+qué tiene que chequear quien haga la recepción para que el material
+entre (por ej. que los tornillos sean amarillos).
+
+dos opciones: 
+-hacer una tabla en la bbdd para solicitud de materiales
+y otra para ordenes de compra. las ordenes de compra pueden ser
+para cualquier cosa.
+-agregar la columna control en la tabla de ordenescompra y que sea
+un campo para cualquier cosa que se compre.
+--------------------------------------------------------------------
+diferencia entre recepcion y entrega de materiales?
+recepción: recibe materia prima desde proveedor.
+entrega de materiales: desde pañol/depo a operario que lo requiere
+--------------------------------------------------------------------
