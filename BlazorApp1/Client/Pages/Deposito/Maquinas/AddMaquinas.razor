@@ -7,7 +7,7 @@
             <div class="row" style="width=100%;">
                 <div class="col-sm-4">
                     <label>Marca</label>
-                    <InputText class="form-control" @bind-Value="@oMaquinasHerramienta.Marca" placeholder="Marca"></InputText>
+                    <InputText @bind-Value="@oMaquinasHerramienta.Marca" class="form-control" placeholder="Marca"></InputText>
                     <ValidationMessage For="(()=> oMaquinasHerramienta.Marca)" style="color:red;" />
                 </div>
                 <div class="col-sm-4">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label class="col-sm">Estado</label>
-                    <InputText @bind-Value="@oMaquinasHerramienta.Estado" class="form-control" placeholder="Estado"></InputText>
+                    <RadzenDropDown class="form-control" TValue="string" Data=@(estado) placeholder="Estado" @bind-Value=@oMaquinasHerramienta.Estado />
                     <ValidationMessage For="(()=> oMaquinasHerramienta.Estado)" style="color:red;" />
                 </div>
                 <div class="col-sm-4">
@@ -61,7 +61,7 @@
             <div class="row" style="width=100%;">
                 <div class="col-sm-4">
                     <label>Disposicion</label>
-                    <InputText class="form-control" @bind-Value="@oMaquinasHerramienta.Disposicion" placeholder="Disposicion"></InputText>
+                    <RadzenDropDown class="form-control" TValue="string" Data=@(disposicion) placeholder="Disposicion" @bind-Value=@oMaquinasHerramienta.Disposicion />
                     <ValidationMessage For="(()=> oMaquinasHerramienta.Disposicion)" style="color:red;" />
                 </div>
                 <div class="col-sm-4">
@@ -84,7 +84,9 @@
     Respuesta<MaquinasHerramienta> oRta = new();
     [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
     [Parameter] public int id { get; set; }
-
+    List<string> estado = new() { "Alta", "Baja" };
+    List<string> disposicion = new() { "Opcion 1", "Opcion 2" };
+    
     protected override async Task OnInitializedAsync()
     {
         if (id != 0)

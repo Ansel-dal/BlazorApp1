@@ -1,5 +1,5 @@
-﻿<div class="card" >
-    <div class="card-body" >
+﻿<div class="card">
+    <div class="card-body">
 
         <EditForm Model="@oPersonal" OnValidSubmit="Guardar">
             <DataAnnotationsValidator />
@@ -28,7 +28,6 @@
                     <label class="col-sm">DNI</label>
                     <InputNumber @bind-Value="@oPersonal.Dni" class="form-control" placeholder="DNI"></InputNumber>
                     <ValidationMessage For="(()=> oPersonal.Dni)" style="color:red;" />
-
                 </div>
                 <div class="col-sm-4">
                     <label class="col-sm">Mail</label>
@@ -37,7 +36,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label>Categoria</label>
-                    <InputText class="form-control" @bind-Value="@oPersonal.Categoria" placeholder="Categoria"></InputText>
+                    <RadzenDropDown class="form-control" TValue="string" Data=@(categoria) placeholder="Categoria" @bind-Value=@oPersonal.Categoria />
                     <ValidationMessage For="(()=> oPersonal.Categoria)" style="color:red;" />
                 </div>
             </div>
@@ -58,7 +57,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label>Puesto</label>
-                    <InputText class="form-control" @bind-Value="@oPersonal.Puesto" placeholder="Puesto"></InputText>
+                    <RadzenDropDown class="form-control" TValue="string" Data=@(puesto) placeholder="Puesto" @bind-Value=@oPersonal.Puesto />
                     <ValidationMessage For="(()=> oPersonal.Puesto)" style="color:red;" />
 
                 </div>
@@ -67,9 +66,8 @@
             <div class="row">
                 <div class="col-sm-4">
                     <label>Condicion contractual</label>
-                    <InputText class="form-control" @bind-Value="@oPersonal.CondicionContractual" placeholder="Condicion contractual"></InputText>
+                    <RadzenDropDown class="form-control" TValue="string" Data=@(condicionescontractuales) placeholder="Condicion contractual" @bind-Value=@oPersonal.CondicionContractual />
                     <ValidationMessage For="(()=> oPersonal.CondicionContractual)" style="color:red;" />
-
                 </div>
                 <div class="col-sm-4">
                     <label>Legajo</label>
@@ -78,8 +76,8 @@
 
                 </div>
             </div>
-            
-            
+
+
             <br />
             <button type="submit" class="btn btn-primary mr-2">Aceptar</button>
             <button type="button" @onclick="cancel" class="btn btn-light">Cancelar</button>
@@ -95,6 +93,9 @@
     Respuesta<Personal> oRta = new();
     [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
     [Parameter] public int id { get; set; }
+    List<string> condicionescontractuales = new() { "Efectivo", "Agencia", "Pasante" };
+    List<string> puesto = new() { "Administrativo", "Tecnico", "Punzonado" };
+    List<string> categoria = new() { "Opcion 1","Opcion 2", "Opcion 3" };
 
     protected override async Task OnInitializedAsync()
     {

@@ -1,7 +1,4 @@
-﻿
-personal tiene mas categorias //AGREGAR DROPDOWNS 
-
-agregar estado a todo
+﻿agregar estado a todo
 
 hacer "camino" de la ordenes de compra (desde solicitud hasta entregado) y gestion de todo (maquinas, insumos, cuando motrar?, etc)
 
