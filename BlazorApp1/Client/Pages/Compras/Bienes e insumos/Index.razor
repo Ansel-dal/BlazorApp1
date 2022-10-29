@@ -1,15 +1,16 @@
-﻿@page "/organigrama"
+﻿@page "/bienes"
 <br />
 <button class="btn btn-outline-primary" @onclick="ComeBack"><FeatherArrowLeft Color="Blue"></FeatherArrowLeft></button>
 <br />
 <br />
-<h1>Organigrama institucional</h1>
-<p>Descripción organigrama (*)</p>
+<h1>Bienes e insumos</h1>
+<p>En esta sección se podrán gestionar las solicitudes que llegan desde el pañol.</p>
 <hr />
 
-@code{
+
+@code {
     async Task ComeBack()
     {
-        nav.NavigateTo("/administracion");
+        nav.NavigateTo("/compras");
     }
 }

@@ -1,9 +1,11 @@
 ﻿@page "/compras"
-<h1>Compras</h1>
 <br />
+<button class="btn btn-outline-primary" @onclick="ComeBack"><FeatherArrowLeft Color="Blue"></FeatherArrowLeft></button>
+<br />
+<br />
+<h1>Compras</h1>
 <p>Descripción compras (*)</p>
 <hr />
-<br>
 
 <style>
 
@@ -28,9 +30,9 @@
     <div class="container">
         <div class="row">
             <div class=" col-xl-3 col-md-6 mb-4">
-                <div class="card border-10 ">
+                <div class="card border-10 " style="height:350px;">
                     <div @onclick=gotoproveedores>
-                        <img src="/Images/Proveedores.jpg" class="card-img-top" alt="...">
+                        <img src="/Images/Proveedores.jpg" class="card-img-top" alt="..." style="height:200px;">
                         <div class="card-body text-center">
                             <h4 class="card-title mb-0">Proveedores</h4>
                             <label>Descripción proveedores (*)</label>
@@ -40,9 +42,9 @@
             </div>
 
             <div class=" col-xl-3 col-md-6 mb-4">
-                <div class="card border-10 ">
+                <div class="card border-10 " style="height:350px;">
                     <div @onclick=gotobienes>
-                        <img src="/Images/Bienes e Insumos.jpg" class="card-img-top" alt="...">
+                        <img src="/Images/Bienes e Insumos.jpg" class="card-img-top" alt="..." style="height:200px;">
                         <div class="card-body text-center">
                             <h4 class="card-title mb-0">Bienes e insumos</h4>
                             <label>Descripción ingreso de bienes (*)</label>
@@ -52,9 +54,9 @@
             </div>
 
             <div class=" col-xl-3 col-md-6 mb-4">
-                <div class="card border-10 ">
+                <div class="card border-10 " style="height:350px;">
                     <div @onclick=gotoordenes>
-                        <img src="/Images/Órdenes de Compra.jpg" class="card-img-top" alt="...">
+                        <img src="/Images/Órdenes de Compra.jpg" class="card-img-top" alt="..." style="height:200px;">
                         <div class="card-body text-center">
                             <h4 class="card-title mb-0">Generador de órdenes de compra</h4>
                             <label>Descripción generador de oc (*)</label>
@@ -83,6 +85,11 @@
     async Task gotoordenes()
     {
         nav.NavigateTo("/ordenes");
+
+    }
+    async Task ComeBack()
+    {
+        nav.NavigateTo("/");
 
     }
 }

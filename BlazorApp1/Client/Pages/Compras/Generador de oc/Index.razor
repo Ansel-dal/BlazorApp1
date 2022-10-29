@@ -1,4 +1,16 @@
 ﻿@page "/ordenes"
+<br />
+<button class="btn btn-outline-primary" @onclick="ComeBack"><FeatherArrowLeft Color="Blue"></FeatherArrowLeft></button>
+<br />
+<br />
 <h1>Generador de órdenes de compra</h1>
-<hr />
 <p>En esta sección se podrán gestionar las órdenes de compra.</p>
+<hr />
+
+
+@code{
+    async Task ComeBack()
+    {
+        nav.NavigateTo("/compras");
+    }
+}

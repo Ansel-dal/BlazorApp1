@@ -1,29 +1,14 @@
 ﻿
+personal tiene mas categorias //AGREGAR DROPDOWNS 
 
-En depósito solo visualización, y crud en bienes e insumos (compras).
+agregar estado a todo
 
-personal tiene mas categorias 
+hacer "camino" de la ordenes de compra (desde solicitud hasta entregado) y gestion de todo (maquinas, insumos, cuando motrar?, etc)
 
-proveedores agrega razonSocial, saca nombre saca CF y cambiacale por direccion
-clientes same + agrega corredor
+modulo produccion
 
-panel deposito: bienes insumos sin el +, maquinas y herramientas– Recepción de Materiales – Entrega de Materiales – Solicitud de Materiales
+usuarios
 
-activo cambio por maquinasherramientas
-Código / Asignación (es el sector en el cual se encontrará ese elemento) / Periodicidad de Mantenimiento preventivo
-Descripción de mantenimiento preventivo / Agregar campo BAJA y si está marcado indicar el motivo de la baja al igual que DISPOSICIÓN.
-Cambiar Campo Nombre por Descripción.
-Eliminar Campo Cantidad
-
-creamos nueva ordencompra
-
---------------------------------------------------------------------
-
-que es disposicion??? para personal sector donde labura.
-			   para máquinas es sector donde está
---------------------------------------------------------------------
-personal tiene estado: baja, alta
-maquinas tiene estado: operativa, en reparación, baja
 --------------------------------------------------------------------
 agregar campo????
 se genera una solicitud desde el pañol (pido tornillos), pasa a 
@@ -40,7 +25,4 @@ para cualquier cosa.
 -agregar la columna control en la tabla de ordenescompra y que sea
 un campo para cualquier cosa que se compre.
 --------------------------------------------------------------------
-diferencia entre recepcion y entrega de materiales?
-recepción: recibe materia prima desde proveedor.
-entrega de materiales: desde pañol/depo a operario que lo requiere
---------------------------------------------------------------------
+

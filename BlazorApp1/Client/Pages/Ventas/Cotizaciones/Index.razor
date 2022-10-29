@@ -1,5 +1,14 @@
 ﻿@page "/cotizaciones"
-
+<br />
+<button class="btn btn-outline-primary" @onclick="ComeBack"><FeatherArrowLeft Color="Blue"></FeatherArrowLeft></button>
+<br />
+<br />
 <h1>Cotizaciones</h1>
-<hr />
 <p>En esta sección se podrán crear cotizaciones.</p>
+<hr />
+@code{
+    async Task ComeBack()
+    {
+        nav.NavigateTo("/ventas");
+    }
+}

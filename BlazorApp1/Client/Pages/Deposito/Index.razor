@@ -1,11 +1,15 @@
 ﻿@page "/deposito"
-<h1>Depósito</h1>
 <br />
+<button class="btn btn-outline-primary" @onclick="ComeBack"><FeatherArrowLeft Color="Blue"></FeatherArrowLeft></button>
+<br />
+<br />
+<h1>Depósito</h1>
 <p>En esta sección se podrá gestionar el deposito.</p>
 <hr />
 <button class="btn btn-outline-success" @onclick="gotorecepcion">Carga de materiales</button>
-<br/>
-<br>
+<br />
+<br />
+
 <style>
 
     .asd {
@@ -31,20 +35,20 @@
     <div class="row">
 
         <div class=" col-xl-3 col-md-6 mb-4">
-            <div class="card border-10 ">
-                <div @onclick=gotoactivos>
-                    <img src="/Images/Máquinas y Herramientas.webp" class="card-img-top" alt="...">
+            <div class="card border-10 " style="height:350px;">
+                <div @onclick=gotomaquinas>
+                    <img src="/Images/Máquinas y Herramientas.webp" class="card-img-top" alt="..." style="height:200px;">
                     <div class="card-body text-center">
-                        <h4 class="card-title mb-0">Activos</h4>
-                        <label>Descripción activos (*)</label>
+                        <h4 class="card-title mb-0">Maquinas</h4>
+                        <label>Descripción maquinas (*)</label>
                     </div>
                 </div>
             </div>
         </div>
         <div class=" col-xl-3 col-md-6 mb-4">
-            <div class="card border-10 ">
+            <div class="card border-10 " style="height:350px;">
                 <div @onclick=gotoinsumos>
-                    <img src="/Images/insumos.png" class="card-img-top" alt="...">
+                    <img src="/Images/insumos.png" class="card-img-top" alt="..." style="height:200px;">
                     <div class="card-body text-center">
                         <h4 class="card-title mb-0">Insumos</h4>
                         <label>Descripción insumos (*)</label>
@@ -53,9 +57,9 @@
             </div>
         </div>
         <div class=" col-xl-3 col-md-6 mb-4">
-            <div class="card border-10 ">
+            <div class="card border-10 " style="height:350px;">
                 <div @onclick=gotorepuestos>
-                    <img src="/Images/repuestos.png" class="card-img-top" alt="...">
+                    <img src="/Images/repuestos.png" class="card-img-top" alt="..." style="height:200px;">
                     <div class="card-body text-center">
                         <h4 class="card-title mb-0">Repuestos</h4>
                         <label>Descripción repuestos (*)</label>
@@ -64,9 +68,9 @@
             </div>
         </div>
         <div class=" col-xl-3 col-md-6 mb-4">
-            <div class="card border-10 ">
+            <div class="card border-10 " style="height:350px;">
                 <div @onclick=gotomateriaprima>
-                    <img src="/Images/materiaprima.png" class="card-img-top" alt="...">
+                    <img src="/Images/materiaprima.png" class="card-img-top" alt="..." style="height:200px;">
                     <div class="card-body text-center">
                         <h4 class="card-title mb-0">Materia prima</h4>
                         <label>Descripción materia prima (*)</label>
@@ -80,9 +84,9 @@
 
 
 @code {
-    async Task gotoactivos()
+    async Task gotomaquinas()
     {
-        nav.NavigateTo("/activos");
+        nav.NavigateTo("/maquinas");
     }
     async Task gotoinsumos()
     {
@@ -101,6 +105,11 @@
     async Task gotorecepcion()
     {
         nav.NavigateTo("/recepcionmateriales");
+
+    }
+    async Task ComeBack()
+    {
+        nav.NavigateTo("/");
 
     }
 }

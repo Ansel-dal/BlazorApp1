@@ -1,5 +1,6 @@
 using BlazorApp1.Client;
 using Blazored.Modal;
+using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -8,5 +9,5 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddBlazoredModal();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
+builder.Services.AddSweetAlert2();
 await builder.Build().RunAsync();

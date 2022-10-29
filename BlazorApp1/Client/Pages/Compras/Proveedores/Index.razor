@@ -1,39 +1,42 @@
 ﻿@page "/proveedores"
-<h1>Proveedores</h1>
 <br />
+<button class="btn btn-outline-primary" @onclick="ComeBack"><FeatherArrowLeft Color="Blue"></FeatherArrowLeft></button>
+<br />
+<br />
+<h1>Proveedores</h1>
 <p>Descripción proveedores (*)</p>
 <hr />
-
-<button class="btn btn-outline-success" @onclick="()=>add(0)"><FeatherPlus Color="Green"></FeatherPlus></button>
+<button class="btn btn-outline-success" @onclick="()=>add(0)">Agregar proveedor</button>
 <br />
 <br />
-
 
 <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5"
                 AllowPaging="true" ShowPagingSummary="true"
                 Data="@oRespuesta.List" TItem="Proveedore" ColumnWidth="50px" LogicalFilterOperator="LogicalFilterOperator.Or">
     <Columns>
         <RadzenDataGridColumn TItem="Proveedore" Property="Id" Title="ID" Width="40px" />
-        <RadzenDataGridColumn TItem="Proveedore" Property="NombreEmpresa" Title="Nombre" Frozen="true" Width="100px" />
+        <RadzenDataGridColumn TItem="Proveedore" Property="RazonSocial" Title="Razón social"  Width="100px" />
         <RadzenDataGridColumn TItem="Proveedore" Property="Cuit" Title="Cuit" Width="100px" />
-        <RadzenDataGridColumn TItem="Proveedore" Property="Calle" Title="Calle" Width="80px" />
-        <RadzenDataGridColumn TItem="Proveedore" Property="Mail" Title="Mail" Width="80px" />
-        <RadzenDataGridColumn TItem="Proveedore" Property="Telefono" Title="Telefono" Width="80px" />
-        <RadzenDataGridColumn TItem="Proveedore" Property="Cp" Title="Codigo postal" Width="60px" />
-        <RadzenDataGridColumn TItem="Proveedore" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="50px">
+        <RadzenDataGridColumn TItem="Proveedore" Property="NombreContacto" Title="Nombre del Contácto" Width="100px" />
+        <RadzenDataGridColumn TItem="Proveedore" Property="" Title="" Filterable="false" Width="30px">
             <Template Context="data">
-                <RadzenButton ButtonStyle="ButtonStyle.Info" Icon="refresh" Class="m-1" Click=@(() => add(data.Id)) Text="" />
+                <RadzenButton ButtonStyle="ButtonStyle.Info" Icon="refresh" Click=@(() => add(data.Id)) Text="" />
             </Template>
-
         </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="Proveedore" Property="" Title="" Frozen="true" Sortable="false" Filterable="false" Width="50px">
+        <RadzenDataGridColumn TItem="Proveedore" Property="" Title="" Filterable="false" Width="30px">
             <Template Context="data">
-                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="report" Class="m-1" Click=@(() => Deletear(data.Id)) Text="" TextAlign="TextAlign.Left" />
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="report" Click=@(() => alertaDelete(data.Id)) Text="" TextAlign="TextAlign.Left" />
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Proveedore" Property="" Title="" Filterable="false" Width="30px">
+            <Template Context="data">
+                <RadzenButton ButtonStyle="ButtonStyle.Info" Icon="info" Click=@(() => gotoinfo(data.Id)) Text="" TextAlign="TextAlign.Left" />
             </Template>
         </RadzenDataGridColumn>
 
     </Columns>
 </RadzenDataGrid>
+
 
 
 
@@ -55,11 +58,41 @@
         StateHasChanged();
     }
 
-    async void Deletear(int id)
+    async Task ComeBack()
+    {
+        nav.NavigateTo("/compras");
+    }
+
+
+    async Task delete(int id)
     {
         await http.DeleteAsync($"/api/Proveedore/{id}");
         await Get();
     }
+
+    public async Task alertaDelete(int id)
+    {
+        SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "¿Está seguro?",
+                Text = "Se eliminará este grupo",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Eliminar",
+                CancelButtonText = "Cancelar"
+            });
+
+        if (!string.IsNullOrEmpty(result.Value))
+        {
+            delete(id);
+
+        }
+        else if (result.Dismiss == DismissReason.Cancel)
+        {
+
+        }
+    }
+   
 
     async Task add(int id)
     {
@@ -101,6 +134,27 @@
             {
                 await Get();
             }
+        }
+    }
+    async Task gotoinfo(int id)
+    {
+        var parameters = new ModalParameters();
+        var options = new ModalOptions()
+            {
+                HideHeader = true,
+                HideCloseButton = true
+            };
+        parameters.Add(nameof(Info.id), id);
+        var formModal = Modal.Show<Info>("", parameters, options);
+        var result = await formModal.Result;
+
+        if (result.Cancelled)
+        {
+            Console.WriteLine("Modal was cancelled");
+        }
+        else
+        {
+            await Get();
         }
     }
 }

@@ -4,7 +4,7 @@
         <EditForm Model="@oProveedor" OnValidSubmit="Guardar">
             <DataAnnotationsValidator />
 
-            <div class="row" style="width:100%;">
+            <div class="row">
                 <div class="col-sm-6">
                     <label>Razon social</label>
                     <InputText class="form-control" @bind-Value="@oProveedor.RazonSocial" placeholder="Razon social"></InputText>
@@ -26,11 +26,12 @@
                     <label class="col-sm">Mail</label>
                     <InputText @bind-Value="@oProveedor.Mail" class="form-control" placeholder="Mail"></InputText>
                     <ValidationMessage For="(()=> oProveedor.Mail)" style="color:red;" />
-
-
                 </div>
-
-
+                <div class="col-sm-6">
+                    <label class="col-sm">Dirección</label>
+                    <InputText @bind-Value="@oProveedor.Direccion" class="form-control" placeholder="Dirección"></InputText>
+                    <ValidationMessage For="(()=> oProveedor.Direccion)" style="color:red;" />
+                </div>
             </div>
             <br />
 
@@ -57,12 +58,6 @@
                     <ValidationMessage For="(()=> oProveedor.NombreContacto)" style="color:red;" />
 
                 </div>
-
-
-            </div>
-            <br>
-            <div class="row">
-
                 <div class="col-sm-6">
                     <label class="col-sm">Observaciones</label>
                     <InputText @bind-Value="@oProveedor.Observaciones" class="form-control" placeholder="Observaciones"></InputText>
@@ -71,8 +66,9 @@
                 </div>
             </div>
             <br />
+
             <button type="submit" class="btn btn-primary mr-2">Aceptar</button>
-            <button @onclick="cancel" class="btn btn-light">Cancelar</button>
+            <button type="button" @onclick="cancel" class="btn btn-light">Cancelar</button>
         </EditForm>
     </div>
 </div>

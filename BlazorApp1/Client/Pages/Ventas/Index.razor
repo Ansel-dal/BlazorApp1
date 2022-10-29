@@ -1,9 +1,11 @@
 ﻿@page "/ventas"
-<h1>Ventas</h1>
 <br />
+<button class="btn btn-outline-primary" @onclick="ComeBack"><FeatherArrowLeft Color="Blue"></FeatherArrowLeft></button>
+<br />
+<br />
+<h1>Ventas</h1>
 <p>Descripción ventas (*)</p>
 <hr />
-<br>
 
 <style>
 
@@ -29,10 +31,10 @@
 <div class="container">
     <div class="row">
 
-        <div class=" col-xl-3 col-md-6 mb-4">
+        <div class=" col-xl-3 col-md-6 mb-4" style="height:350px;">
             <div class="card border-10 ">
                 <div @onclick=gotoclientes>
-                    <img src="/Images/Clientes.png" class="card-img-top" alt="...">
+                    <img src="/Images/Clientes.png" class="card-img-top" alt="..." style="height:200px;">
                     <div class="card-body text-center">
                         <h4 class="card-title mb-0">Clientes</h4>
                         <label>Descripción clientes (*)</label>
@@ -41,10 +43,10 @@
             </div>
         </div>
         
-        <div class=" col-xl-3 col-md-6 mb-4">
+        <div class=" col-xl-3 col-md-6 mb-4" style="height:350px;">
             <div class="card border-10 ">
                 <div @onclick=gotocotizaciones>
-                    <img src="/Images/Cotizaciones.jpg" class="card-img-top" alt="...">
+                    <img src="/Images/Cotizaciones.jpg" class="card-img-top" alt="..." style="height:200px;">
                     <div class="card-body text-center">
                         <h4 class="card-title mb-0">Cotizaciones</h4>
                         <label>Descripción cotizaciones (*)</label>
@@ -76,5 +78,9 @@
     {
         nav.NavigateTo("/proveedores");
 
+    }
+    async Task ComeBack()
+    {
+        nav.NavigateTo("/");
     }
 }

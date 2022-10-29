@@ -1,0 +1,15 @@
+﻿@page "/recepcionmateriales"
+<br />
+<button class="btn btn-outline-primary" @onclick="ComeBack"><FeatherArrowLeft Color="Blue"></FeatherArrowLeft></button>
+<br />
+<br />
+<h1>Recepción de materiales</h1>
+<p>En esta sección se podrán gestionar la recepción de los materiales.</p>
+<hr />
+
+@code {
+    async Task ComeBack()
+    {
+        nav.NavigateTo("/deposito");
+    }
+}
